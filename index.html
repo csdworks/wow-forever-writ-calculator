@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>ACA Writ Calculator</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;color:#f0eee8;background:#111715}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px 16px;background:radial-gradient(ellipse at 20% 0%,#223b30,transparent 65%)}
+main{width:100%;max-width:560px}.brand{font-size:14px;letter-spacing:.16em;font-weight:750;color:#b3d9a0;margin-bottom:58px}.badge{font-size:12px;color:#c4cbbf;letter-spacing:.1em;text-transform:uppercase}
+h1{font-size:clamp(36px,8vw,52px);line-height:1.08;letter-spacing:-.045em;margin:16px 0 20px}p{color:#aab5ad;line-height:1.65}
+form{margin-top:34px;padding:26px;border:1px solid #36463c;background:#18221dde;border-radius:20px}
+fieldset{border:0;margin:0;padding:0}fieldset+fieldset{margin-top:22px;padding-top:20px;border-top:1px solid #36463c}
+legend{font-size:12px;color:#c4cbbf;letter-spacing:.1em;text-transform:uppercase;padding:0;margin-bottom:14px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
+input,select{width:100%;font:inherit;border-radius:10px;padding:13px 14px;background:#101812;border:1px solid #526354;color:#fff;outline-offset:4px}
+input:focus-visible,select:focus-visible{outline:2px solid #c5edae}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.row3 label{font-size:13px}
+.field+.field,.row+.row,.row+.field,.field+.row{margin-top:14px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:#c4cfc6;margin-top:16px;cursor:pointer}.check input{width:18px;height:18px;padding:0;margin:2px 0 0;accent-color:#c5edae;flex:none}
+.hint{font-size:12px;margin:8px 0 0;color:#8d9b90}
+.result{margin-top:28px;padding:22px;border:1px solid #4f7a55;border-radius:16px;background:#1b2e22}
+.result h2{margin:0 0 4px;font-size:16px;color:#d8f6c7}
+.need{font-size:clamp(30px,7vw,40px);font-weight:750;letter-spacing:-.03em;margin:4px 0 2px;color:#f0eee8}
+.need small{font-size:14px;font-weight:500;color:#aab5ad;letter-spacing:0}
+.tiers{display:grid;gap:10px;margin-top:16px}
+.tier{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;padding:14px 16px;border:1px solid #36463c;border-radius:12px;background:#111a15}
+.tier b{font-size:15px}.tier .n{font-size:24px;font-weight:750;color:#c5edae;text-align:right}
+.tier .sub{grid-column:1/-1;font-size:12px;color:#8d9b90}
+.note{font-size:13px;color:#c4cfc6;line-height:1.6;margin:14px 0 0}.note strong{color:#f0eee8}
+.done{color:#c5edae;font-weight:700}
+.where{margin-top:18px;border-top:1px solid #36463c;padding-top:14px;font-size:14px;color:#c4cfc6}.where summary{cursor:pointer;font-weight:600;color:#d8f6c7}.where summary:focus-visible{outline:2px solid #c5edae;outline-offset:4px;border-radius:4px}.where ul{margin:12px 0 0;padding-left:20px;line-height:1.6}.where li+li{margin-top:6px}.where strong{color:#f0eee8}
+footer{font-size:12px;color:#8d9b90;margin-top:24px;text-align:center;line-height:1.7}
+@media (max-width:480px){form{padding:20px}.row3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<div class="brand">ACAWrits /</div>
+<div class="badge">WoW Forever · Azeroth Commerce Authority</div>
+<h1>How many writs<br>to Friendly?</h1>
+<p>Enter where you stand with the Azeroth Commerce Authority. The page works out how many Craftsman's Writs you still need to deliver. Everything is calculated on this page, and nothing is sent anywhere.</p>
+
+<form id="calc" autocomplete="off">
+<fieldset>
+<legend>Your standing</legend>
+<div class="row">
+<div><label for="cur">Current level</label>
+<select id="cur"><option value="0">Neutral</option><option value="1">Friendly</option><option value="2">Honored</option><option value="3">Revered</option></select></div>
+<div><label for="into">Rep into level</label>
+<input id="into" type="number" min="0" step="1" value="0" inputmode="numeric" aria-describedby="into-hint"></div>
+</div>
+<p class="hint" id="into-hint">The bar in your Reputation panel, e.g. <span id="into-max">0 / 3000</span>.</p>
+<div class="field"><label for="tgt">Target</label>
+<select id="tgt"><option value="1" selected>Friendly</option><option value="2">Honored</option><option value="3">Revered</option><option value="4">Exalted</option></select></div>
+<label class="check"><input id="label" type="checkbox" checked><span>I still have the one-time <strong>Shipping Label</strong> quest to turn in (+2,000 rep)</span></label>
+</fieldset>
+
+<fieldset>
+<legend>Bonuses</legend>
+<div class="field"><label for="dip">Diplomat talent rank</label>
+<select id="dip"><option value="0">None</option><option value="1">1 / 5 (+2%)</option><option value="2">2 / 5 (+4%)</option><option value="3">3 / 5 (+6%)</option><option value="4">4 / 5 (+8%)</option><option value="5">5 / 5 (+10%)</option></select></div>
+</fieldset>
+
+<fieldset>
+<legend>Writs already in your bags (optional)</legend>
+<div class="row3">
+<div><label for="hJ">Journeyman</label><input id="hJ" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+<div><label for="hE">Expert</label><input id="hE" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+<div><label for="hA">Artisan</label><input id="hA" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>Cost per writ in gold (optional)</legend>
+<div class="row3">
+<div><label for="cJ">Journeyman</label><input id="cJ" type="number" min="0" step="0.01" placeholder="e.g. 0.5" inputmode="decimal"></div>
+<div><label for="cE">Expert</label><input id="cE" type="number" min="0" step="0.01" placeholder="e.g. 1.5" inputmode="decimal"></div>
+<div><label for="cA">Artisan</label><input id="cA" type="number" min="0" step="0.01" placeholder="e.g. 3" inputmode="decimal"></div>
+</div>
+<p class="hint">Price of the sealed writ plus the item it asks for. Leave blank to skip cost.</p>
+</fieldset>
+
+<section class="result" aria-live="polite">
+<h2 id="r-title">Rep still needed</h2>
+<div class="need" id="r-need">0</div>
+<div id="r-body"></div>
+</section>
+
+<details class="where">
+<summary>Where do these numbers come from?</summary>
+<ul>
+<li><strong>Writ rep:</strong> Journeyman 75, Expert 125, Artisan 200 per delivery.</li>
+<li><strong>Daily limit:</strong> each named order counts once a day. There are about 45 Journeyman, 60 Expert and 45 Artisan orders. Different orders share no cap, and extra copies keep for later days.</li>
+<li><strong>Levels:</strong> Neutral 3,000 · Friendly 6,000 · Honored 12,000 · Revered 21,000 (42,000 from Neutral to Exalted).</li>
+<li><strong>Shipping Label:</strong> one-time quest from your first crate or writ, +2,000 rep.</li>
+<li><strong>Forged Delivery Receipt:</strong> 15 Merchant's Favor, needs Friendly, turns an empty Waylaid Crate into 50 rep.</li>
+<li><strong>Diplomat:</strong> +2% rep per rank. This comes from a single guide and hasn't been confirmed.</li>
+<li>Sources: community guides from November 2026 (wowforever.be, conquestcapped.com, wow-professions.com). WoW Forever is new, so hotfixes may change these numbers.</li>
+</ul>
+</details>
+</form>
+
+<footer>Fan-made calculator · not affiliated with Blizzard Entertainment</footer>
+</main>
+<script>
+(() => {
+  const LEVELS = ["Neutral", "Friendly", "Honored", "Revered", "Exalted"];
+  const WIDTH = [3000, 6000, 12000, 21000];          // rep needed to clear each level
+  const START = [0, 3000, 9000, 21000, 42000];       // cumulative rep from bottom of Neutral
+  const LABEL_REP = 2000;
+  const RECEIPT = { rep: 50, favor: 15 };
+  const TIERS = [
+    { key: "J", name: "Journeyman", rep: 75,  orders: 45 },
+    { key: "E", name: "Expert",     rep: 125, orders: 60 },
+    { key: "A", name: "Artisan",    rep: 200, orders: 45 },
+  ];
+
+  const $ = id => document.getElementById(id);
+  const int = id => Math.max(0, Math.floor(Number($(id).value) || 0));
+  const num = id => { const v = $(id).value.trim(); return v === "" ? null : Math.max(0, Number(v) || 0); };
+  const fmt = n => n.toLocaleString("en-US");
+  const gold = g => g >= 1 ? `${fmt(Math.round(g * 100) / 100)}g` : `${Math.round(g * 100)}s`;
+  const plural = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+
+  function calc() {
+    const cur = +$("cur").value;
+    const into = Math.min(int("into"), WIDTH[cur] - 1);
+    $("into-max").textContent = `${fmt(into)} / ${fmt(WIDTH[cur])}`;
+
+    // keep target above current level
+    [...$("tgt").options].forEach(o => { o.disabled = +o.value <= cur; });
+    if (+$("tgt").value <= cur) $("tgt").value = String(cur + 1);
+    const tgt = +$("tgt").value;
+
+    const bonus = 1 + 0.02 * +$("dip").value;
+    const repOf = base => Math.floor(base * bonus);
+
+    const now = START[cur] + into;
+    const labelRep = $("label").checked ? repOf(LABEL_REP) : 0;
+    const held = TIERS.map(t => ({ ...t, have: int("h" + t.key), each: repOf(t.rep), cost: num("c" + t.key) }));
+    const heldRep = held.reduce((s, t) => s + t.have * t.each, 0);
+
+    const gap = START[tgt] - now;
+    const left = Math.max(0, gap - labelRep - heldRep);
+
+    $("r-title").textContent = `Rep still needed for ${LEVELS[tgt]}`;
+    $("r-need").innerHTML = left === 0
+      ? `<span class="done">You're there</span>`
+      : `${fmt(left)} <small>of ${fmt(gap)} rep</small>`;
+
+    let html = "";
+    const parts = [];
+    if (labelRep) parts.push(`Shipping Label covers <strong>${fmt(labelRep)}</strong>`);
+    if (heldRep) parts.push(`writs in your bags cover <strong>${fmt(heldRep)}</strong>`);
+    if (parts.length) html += `<p class="note">${parts.join(", ").replace(/^./, c => c.toUpperCase())}.</p>`;
+
+    if (left > 0) {
+      html += `<div class="tiers">` + held.map(t => {
+        const n = Math.ceil(left / t.each);
+        const days = Math.ceil(n / t.orders);
+        const cost = t.cost != null ? ` · about ${gold(n * t.cost)}` : "";
+        return `<div class="tier"><b>${t.name} only</b><span class="n">${fmt(n)}</span>
+          <span class="sub">${t.each} rep each · at least ${plural(days, "day")} (${t.orders} different orders a day)${cost}</span></div>`;
+      }).join("") + `</div>`;
+
+      // Forged Delivery Receipts only work from Friendly onward
+      const fromFriendly = Math.max(0, START[tgt] - Math.max(now + labelRep + heldRep, START[1]));
+      if (tgt > 1 && fromFriendly > 0) {
+        const r = Math.ceil(fromFriendly / repOf(RECEIPT.rep));
+        html += `<p class="note">Once you reach Friendly, <strong>Forged Delivery Receipts</strong> can cover the remaining ${fmt(fromFriendly)} rep. You'd need ${plural(r, "receipt")} (${fmt(r * RECEIPT.favor)} Merchant's Favor) and ${plural(r, "empty Waylaid Crate")}.</p>`;
+      }
+
+      const best = held.filter(t => t.cost != null && t.cost > 0)
+        .map(t => ({ name: t.name, perRep: t.cost / t.each }))
+        .sort((a, b) => a.perRep - b.perRep)[0];
+      if (best) html += `<p class="note">Cheapest rep per gold from your prices: <strong>${best.name}</strong> (${gold(best.perRep * 100)} per 100 rep).</p>`;
+    }
+    $("r-body").innerHTML = html;
+  }
+
+  $("calc").addEventListener("input", calc);
+  $("calc").addEventListener("submit", e => e.preventDefault());
+  calc();
+})();
+</script>
+</body>
+</html>
