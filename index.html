@@ -6,33 +6,33 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
 <title>WoW Forever Writ Calculator</title>
 <style>
-:root{color-scheme:dark;font-family:system-ui,sans-serif;color:#f0eee8;background:#111715}
-*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px 16px;background:radial-gradient(ellipse at 20% 0%,#223b30,transparent 65%)}
-main{width:100%;max-width:560px}.brand{font-size:14px;letter-spacing:.16em;font-weight:750;color:#b3d9a0;margin-bottom:58px}.badge{font-size:12px;color:#c4cbbf;letter-spacing:.1em;text-transform:uppercase}
-h1{font-size:clamp(36px,8vw,52px);line-height:1.08;letter-spacing:-.045em;margin:16px 0 20px}p{color:#aab5ad;line-height:1.65}
-form{margin-top:34px;padding:26px;border:1px solid #36463c;background:#18221dde;border-radius:20px}
-fieldset{border:0;margin:0;padding:0}fieldset+fieldset{margin-top:22px;padding-top:20px;border-top:1px solid #36463c}
-legend{font-size:12px;color:#c4cbbf;letter-spacing:.1em;text-transform:uppercase;padding:0;margin-bottom:14px}
+:root{color-scheme:dark;font-family:system-ui,sans-serif;color:#efedf7;background:#0d0b1a}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px 16px;background:radial-gradient(1px 1px at 12% 18%,#fff9,transparent),radial-gradient(1px 1px at 78% 9%,#fffa,transparent),radial-gradient(1.5px 1.5px at 64% 32%,#e0d6ff99,transparent),radial-gradient(1px 1px at 33% 71%,#fff8,transparent),radial-gradient(1px 1px at 88% 64%,#fff9,transparent),radial-gradient(1.5px 1.5px at 22% 92%,#c9b8ff88,transparent),radial-gradient(1px 1px at 52% 54%,#fff6,transparent),radial-gradient(1px 1px at 6% 48%,#fff7,transparent),radial-gradient(ellipse at 20% 0%,#3a2378,transparent 60%),radial-gradient(ellipse at 95% 85%,#1a2b5c,transparent 55%),#0d0b1a;background-attachment:fixed}
+main{width:100%;max-width:560px}.brand{font-size:14px;letter-spacing:.16em;font-weight:750;color:#b49cff;margin-bottom:58px}.badge{font-size:12px;color:#c3bfd9;letter-spacing:.1em;text-transform:uppercase}
+h1{font-size:clamp(36px,8vw,52px);line-height:1.08;letter-spacing:-.045em;margin:16px 0 20px}p{color:#aaa6c4;line-height:1.65}
+form{margin-top:34px;padding:26px;border:1px solid #372f5c;background:#17132bde;border-radius:20px}
+fieldset{border:0;margin:0;padding:0}fieldset+fieldset{margin-top:22px;padding-top:20px;border-top:1px solid #372f5c}
+legend{font-size:12px;color:#c3bfd9;letter-spacing:.1em;text-transform:uppercase;padding:0;margin-bottom:14px}
 label{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
-input,select{width:100%;font:inherit;border-radius:10px;padding:13px 14px;background:#101812;border:1px solid #526354;color:#fff;outline-offset:4px}
-input:focus-visible,select:focus-visible{outline:2px solid #c5edae}
+input,select{width:100%;font:inherit;border-radius:10px;padding:13px 14px;background:#0f0c1f;border:1px solid #554a85;color:#fff;outline-offset:4px}
+input:focus-visible,select:focus-visible{outline:2px solid #c9b8ff}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .row3 label{font-size:13px}
 .field+.field,.row+.row,.row+.field,.field+.row{margin-top:14px}
-.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:#c4cfc6;margin-top:16px;cursor:pointer}.check input{width:18px;height:18px;padding:0;margin:2px 0 0;accent-color:#c5edae;flex:none}
-.hint{font-size:12px;margin:8px 0 0;color:#8d9b90}
-.result{margin-top:28px;padding:22px;border:1px solid #4f7a55;border-radius:16px;background:#1b2e22}
-.result h2{margin:0 0 4px;font-size:16px;color:#d8f6c7}
-.need{font-size:clamp(30px,7vw,40px);font-weight:750;letter-spacing:-.03em;margin:4px 0 2px;color:#f0eee8}
-.need small{font-size:14px;font-weight:500;color:#aab5ad;letter-spacing:0}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;color:#c4c0dc;margin-top:16px;cursor:pointer}.check input{width:18px;height:18px;padding:0;margin:2px 0 0;accent-color:#c9b8ff;flex:none}
+.hint{font-size:12px;margin:8px 0 0;color:#8f8aad}
+.result{margin-top:28px;padding:22px;border:1px solid #6b55b8;border-radius:16px;background:#1e1840}
+.result h2{margin:0 0 4px;font-size:16px;color:#e0d6ff}
+.need{font-size:clamp(30px,7vw,40px);font-weight:750;letter-spacing:-.03em;margin:4px 0 2px;color:#efedf7}
+.need small{font-size:14px;font-weight:500;color:#aaa6c4;letter-spacing:0}
 .tiers{display:grid;gap:10px;margin-top:16px}
-.tier{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;padding:14px 16px;border:1px solid #36463c;border-radius:12px;background:#111a15}
-.tier b{font-size:15px}.tier .n{font-size:24px;font-weight:750;color:#c5edae;text-align:right}
-.tier .sub{grid-column:1/-1;font-size:12px;color:#8d9b90}
-.note{font-size:13px;color:#c4cfc6;line-height:1.6;margin:14px 0 0}.note strong{color:#f0eee8}
-.done{color:#c5edae;font-weight:700}
-.where{margin-top:18px;border-top:1px solid #36463c;padding-top:14px;font-size:14px;color:#c4cfc6}.where summary{cursor:pointer;font-weight:600;color:#d8f6c7}.where summary:focus-visible{outline:2px solid #c5edae;outline-offset:4px;border-radius:4px}.where ul{margin:12px 0 0;padding-left:20px;line-height:1.6}.where li+li{margin-top:6px}.where strong{color:#f0eee8}
-footer{font-size:12px;color:#8d9b90;margin-top:24px;text-align:center;line-height:1.7}
+.tier{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;padding:14px 16px;border:1px solid #372f5c;border-radius:12px;background:#110e22}
+.tier b{font-size:15px}.tier .n{font-size:24px;font-weight:750;color:#c9b8ff;text-align:right}
+.tier .sub{grid-column:1/-1;font-size:12px;color:#8f8aad}
+.note{font-size:13px;color:#c4c0dc;line-height:1.6;margin:14px 0 0}.note strong{color:#efedf7}
+.done{color:#c9b8ff;font-weight:700}
+.where{margin-top:18px;border-top:1px solid #372f5c;padding-top:14px;font-size:14px;color:#c4c0dc}.where summary{cursor:pointer;font-weight:600;color:#e0d6ff}.where summary:focus-visible{outline:2px solid #c9b8ff;outline-offset:4px;border-radius:4px}.where ul{margin:12px 0 0;padding-left:20px;line-height:1.6}.where li+li{margin-top:6px}.where strong{color:#efedf7}
+footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-height:1.7}
 @media (max-width:480px){form{padding:20px}.row3{grid-template-columns:1fr}}
 </style>
 </head>
