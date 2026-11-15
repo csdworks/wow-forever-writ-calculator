@@ -1,8 +1,10 @@
-# ACA Writ Calculator
+# WoW Forever Writ Calculator
 
 A single-page, offline calculator for **WoW Forever**. It works out how many Craftsman's Writs you need to reach Friendly (or higher) with the **Azeroth Commerce Authority**.
 
-Open `index.html` in any browser. The page needs no install and no server, and it makes no network requests.
+**Use it online:** https://csdworks.github.io/wow-forever-writ-calculator/
+
+Or open `index.html` in any browser. The page needs no install and no server, and it makes no network requests.
 
 ## What it does
 
