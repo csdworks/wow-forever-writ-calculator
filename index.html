@@ -62,12 +62,6 @@ footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-heigh
 </fieldset>
 
 <fieldset>
-<legend>Bonuses</legend>
-<div class="field"><label for="dip">Diplomat talent rank</label>
-<select id="dip"><option value="0">None</option><option value="1">1 / 5 (+2%)</option><option value="2">2 / 5 (+4%)</option><option value="3">3 / 5 (+6%)</option><option value="4">4 / 5 (+8%)</option><option value="5">5 / 5 (+10%)</option></select></div>
-</fieldset>
-
-<fieldset>
 <legend>Writs already in your bags (optional)</legend>
 <div class="row3">
 <div><label for="hJ">Journeyman</label><input id="hJ" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
@@ -100,7 +94,6 @@ footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-heigh
 <li><strong>Levels:</strong> Neutral 3,000 · Friendly 6,000 · Honored 12,000 · Revered 21,000 (42,000 from Neutral to Exalted).</li>
 <li><strong>Shipping Label:</strong> one-time quest from your first crate or writ, +2,000 rep.</li>
 <li><strong>Forged Delivery Receipt:</strong> 15 Merchant's Favor, needs Friendly, turns an empty Waylaid Crate into 50 rep.</li>
-<li><strong>Diplomat:</strong> +2% rep per rank. This comes from a single guide and hasn't been confirmed.</li>
 <li>Sources: community guides from November 2026 (wowforever.be, conquestcapped.com, wow-professions.com). WoW Forever is new, so hotfixes may change these numbers.</li>
 </ul>
 </details>
@@ -139,12 +132,9 @@ footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-heigh
     if (+$("tgt").value <= cur) $("tgt").value = String(cur + 1);
     const tgt = +$("tgt").value;
 
-    const bonus = 1 + 0.02 * +$("dip").value;
-    const repOf = base => Math.floor(base * bonus);
-
     const now = START[cur] + into;
-    const labelRep = $("label").checked ? repOf(LABEL_REP) : 0;
-    const held = TIERS.map(t => ({ ...t, have: int("h" + t.key), each: repOf(t.rep), cost: num("c" + t.key) }));
+    const labelRep = $("label").checked ? LABEL_REP : 0;
+    const held = TIERS.map(t => ({ ...t, have: int("h" + t.key), each: t.rep, cost: num("c" + t.key) }));
     const heldRep = held.reduce((s, t) => s + t.have * t.each, 0);
 
     const gap = START[tgt] - now;
@@ -173,7 +163,7 @@ footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-heigh
       // Forged Delivery Receipts only work from Friendly onward
       const fromFriendly = Math.max(0, START[tgt] - Math.max(now + labelRep + heldRep, START[1]));
       if (tgt > 1 && fromFriendly > 0) {
-        const r = Math.ceil(fromFriendly / repOf(RECEIPT.rep));
+        const r = Math.ceil(fromFriendly / RECEIPT.rep);
         html += `<p class="note">Once you reach Friendly, <strong>Forged Delivery Receipts</strong> can cover the remaining ${fmt(fromFriendly)} rep. You'd need ${plural(r, "receipt")} (${fmt(r * RECEIPT.favor)} Merchant's Favor) and ${plural(r, "empty Waylaid Crate")}.</p>`;
       }
 

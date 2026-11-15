@@ -23,7 +23,6 @@ Or open `index.html` in any browser. The page needs no install and no server, an
 | Neutral → Friendly → Honored → Revered → Exalted | 3,000 / 6,000 / 12,000 / 21,000 |
 | Shipping Label (one time) | 2,000 rep |
 | Forged Delivery Receipt | 15 Merchant's Favor → 50 rep (Friendly+) |
-| Diplomat talent (unconfirmed) | +2% per rank |
 
 These figures come from community guides as of November 2026. WoW Forever is new and hotfixes may change them. Edit the constants at the top of the `<script>` in `index.html` to update them.
 
