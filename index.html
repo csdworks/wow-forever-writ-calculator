@@ -33,7 +33,10 @@ input:focus-visible,select:focus-visible{outline:2px solid #c9b8ff}
 .done{color:#c9b8ff;font-weight:700}
 .where{margin-top:18px;border-top:1px solid #372f5c;padding-top:14px;font-size:14px;color:#c4c0dc}.where summary{cursor:pointer;font-weight:600;color:#e0d6ff}.where summary:focus-visible{outline:2px solid #c9b8ff;outline-offset:4px;border-radius:4px}.where ul{margin:12px 0 0;padding-left:20px;line-height:1.6}.where li+li{margin-top:6px}.where strong{color:#efedf7}
 footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-height:1.7}
-@media (max-width:480px){form{padding:20px}.row3{grid-template-columns:1fr}}
+.bmc{position:fixed;right:20px;bottom:20px;z-index:10;display:inline-flex;align-items:center;gap:8px;padding:12px 18px 12px 14px;border-radius:999px;background:#ffdd00;color:#0d0b1a;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 6px 24px #0009,0 0 0 1px #0d0b1a33;transition:transform .15s,box-shadow .15s}
+.bmc:hover{transform:translateY(-2px);box-shadow:0 10px 28px #000a,0 0 0 1px #0d0b1a33}.bmc:focus-visible{outline:2px solid #c9b8ff;outline-offset:4px}.bmc svg{width:22px;height:22px;flex:none}
+@media (max-width:480px){form{padding:20px}.row3{grid-template-columns:1fr}body{padding-bottom:96px}.bmc{right:16px;bottom:16px}}
+@media (prefers-reduced-motion:reduce){.bmc{transition:none}.bmc:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -105,6 +108,7 @@ footer{font-size:12px;color:#8f8aad;margin-top:24px;text-align:center;line-heigh
 
 <footer>Fan-made calculator · not affiliated with Blizzard Entertainment</footer>
 </main>
+<a class="bmc" href="https://buymeacoffee.com/atigames" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 2.5c-.6.8-.6 1.7 0 2.5M11.5 2.5c-.6.8-.6 1.7 0 2.5M15 2.5c-.6.8-.6 1.7 0 2.5"/></svg>Buy me a coffee</a>
 <script>
 (() => {
   const LEVELS = ["Neutral", "Friendly", "Honored", "Revered", "Exalted"];
